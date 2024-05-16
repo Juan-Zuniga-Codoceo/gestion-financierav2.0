@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Financiera</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Gestión Financiera</h1>
+
+        <!-- Registro de Usuario - Modal -->
+        <div class="modal" id="registroModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Registro de Usuario</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="registroUsuarioForm">
+                            <div class="form-group">
+                                <label for="nombreUsuario">Nombre de Usuario:</label>
+                                <input type="text" class="form-control" id="nombreUsuario" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="presupuestoUsuario">Presupuesto:</label>
+                                <input type="number" class="form-control" id="presupuestoUsuario" name="presupuesto"
+                                    required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gastos -->
+        <div class="row">
+            <div class="col-md-4" id="gastos">
+                <div class="card">
+                    <div class="card-header">
+                        Ingresar Gasto
+                    </div>
+                    <div class="card-body">
+                        <form id="ingresarGastoForm">
+                            <div class="form-group">
+                                <label for="nombreGasto">Nombre:</label>
+                                <input type="text" class="form-control" id="nombreGasto" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="costoGasto">Costo ($):</label>
+                                <input type="number" class="form-control" id="costoGasto" name="costo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="categoriaGasto">Categoría:</label>
+                                <select class="form-control" id="categoriaGasto" name="categoria" required>
+                                    <option value="Transporte">Bencina</option>
+                                    <option value="Estacionamiento">Estacionamiento</option>
+                                    <option value="Entretenimiento">Entretenimiento</option>
+                                    <option value="Ropa">Ropa</option>
+                                    <option value="Supermercado">Supermercado</option>
+                                    <option value="Delivery">Delivery</option>
+                                    <option value="Mascotas">Arena para mascotas</option>
+                                    <option value="Mascotas">Comida para mascotas</option>
+                                    <option value="Salud">Salud</option>
+                                    <option value="Medicamentos">Medicamentos</option>
+                                    <option value="Educacion">Educación</option>
+                                    <option value="Internet">Internet</option>
+                                    <option value="Luz">Luz</option>
+                                    <option value="Agua">Agua</option>
+                                    <option value="Gas">Gas</option>
+                                    <option value="Otros">Otros</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="fechaGasto">Fecha:</label>
+                                <input type="date" class="form-control" id="fechaGasto" name="fecha">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Agregar</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-header">
+                        Lista de Gastos
+                    </div>
+                    <ul class="list-group list-group-flush" id="listaGastos">
+                        <!-- Aquí se mostrarán los gastos -->
+                    </ul>
+                    <div class="card-footer text-muted" id="totalGastos">
+                        Total: $0
+                    </div>
+                </div>
+            </div>
+
+            <!-- Presupuesto -->
+            <div class="col-md-4" id="presupuesto">
+                <div class="card">
+                    <div class="card-header">
+                        Presupuesto
+                    </div>
+                    <div class="card-body">
+                        <p>Presupuesto inicial: <span id="presupuestoInicial">$0</span></p>
+                        <form id="ingresarIngresoExtraForm">
+                            <div class="form-group">
+                                <label for="ingresoExtra">Ingreso Extra ($):</label>
+                                <input type="number" class="form-control" id="ingresoExtra" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Agregar Ingreso Extra</button>
+                        </form>
+                        <p>Presupuesto Final: <span id="presupuestoFinal">$0</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gastos Clasificados -->
+            <div class="col-md-4" id="gastosClasificados">
+                <div class="card">
+                    <div class="card-header">
+                        Gastos Clasificados
+                    </div>
+                    <ul class="list-group list-group-flush" id="listaGastosClasificados">
+                        <!-- Aquí se mostrarán los gastos clasificados -->
+                    </ul>
+                    <div class="card-footer text-muted" id="totalGastosClasificados">
+                        <!-- Aquí se mostrarán los totales por categoría -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+
