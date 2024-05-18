@@ -112,9 +112,10 @@ $(document).ready(function() {
         e.preventDefault();
 
         const nombre = $('#nombreUsuario').val();
+        const password = $('#passwordUsuario').val();
         const presupuesto = parseFloat($('#presupuestoUsuario').val());
 
-        const usuario = { nombre, presupuesto };
+        const usuario = { nombre, password, presupuesto };
 
         fetch('/usuarios/registro', {
             method: 'POST',
@@ -134,6 +135,69 @@ $(document).ready(function() {
         .catch(error => {
             console.error('Error:', error);
         });
+    });
+
+    $('#loginUsuarioForm').on('submit', function(e) {
+        e.preventDefault();
+
+        const nombre = $('#loginNombreUsuario').val();
+        const password = $('#loginPasswordUsuario').val();
+
+        fetch('/usuarios/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ nombre, password }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Usuario inició sesión correctamente:', data);
+            localStorage.setItem('token', data.token);
+            presupuestoInicial = data.presupuesto; // Actualiza el presupuesto inicial con el valor recibido
+            mostrarPresupuestoInicial();
+            mostrarPresupuestoFinal();
+            $('#loginModal').modal('hide');
+            obtenerPerfil();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+
+    function obtenerPerfil() {
+        const token = localStorage.getItem('token');
+
+        fetch('/usuario/perfil', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Perfil del usuario:', data);
+            presupuestoInicial = data.presupuesto;
+            mostrarPresupuestoInicial();
+            mostrarPresupuestoFinal();
+            gastos = data.gastos;
+            mostrarGastos();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    $('#btnRegistro').on('click', function() {
+        $('#registroModal').modal('show');
+    });
+
+    $('#btnLogin').on('click', function() {
+        $('#loginModal').modal('show');
+    });
+
+    $('#btnPerfil').on('click', function() {
+        obtenerPerfil();
     });
 
     $('#registroModal').modal('show');

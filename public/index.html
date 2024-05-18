@@ -12,6 +12,22 @@
 <body>
     <div class="container">
         <h1>Gestión Financiera</h1>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Gestión Financiera</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="btnRegistro">Registro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="btnLogin">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="btnPerfil">Perfil</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
         <!-- Registro de Usuario - Modal -->
         <div class="modal" id="registroModal" tabindex="-1" role="dialog">
@@ -30,9 +46,12 @@
                                 <input type="text" class="form-control" id="nombreUsuario" name="nombre" required>
                             </div>
                             <div class="form-group">
+                                <label for="passwordUsuario">Contraseña:</label>
+                                <input type="password" class="form-control" id="passwordUsuario" name="password" required>
+                            </div>
+                            <div class="form-group">
                                 <label for="presupuestoUsuario">Presupuesto:</label>
-                                <input type="number" class="form-control" id="presupuestoUsuario" name="presupuesto"
-                                    required>
+                                <input type="number" class="form-control" id="presupuestoUsuario" name="presupuesto" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Registrar</button>
                         </form>
@@ -41,8 +60,35 @@
             </div>
         </div>
 
+        <!-- Login de Usuario - Modal -->
+        <div class="modal" id="loginModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Iniciar Sesión</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="loginUsuarioForm">
+                            <div class="form-group">
+                                <label for="loginNombreUsuario">Nombre de Usuario:</label>
+                                <input type="text" class="form-control" id="loginNombreUsuario" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="loginPasswordUsuario">Contraseña:</label>
+                                <input type="password" class="form-control" id="loginPasswordUsuario" name="password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Gastos -->
-        <div class="row">
+        <div class="row" id="seccionGastos">
             <div class="col-md-4" id="gastos">
                 <div class="card">
                     <div class="card-header">
@@ -142,10 +188,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    
+
     <script src="script.js"></script>
 </body>
 
 </html>
-
-
